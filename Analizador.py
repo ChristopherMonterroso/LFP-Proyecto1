@@ -8,7 +8,8 @@ class analizador:
     def compile(self):
         archivo= open("prueba.txt","r")
         contenido = archivo.readlines()
-        archivo.close
-        print(contenido)
+        archivo.close 
+
+        print("")
 
 analizador().compile()

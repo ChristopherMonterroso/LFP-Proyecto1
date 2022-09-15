@@ -39,13 +39,16 @@ class main:
         Boton_GuardarComo= tkinter.Button(self.Frame,text="Guardar como",font=("bold",13),bg="white", command=self.Guardar_como)
         Boton_GuardarComo.place(x=25,y=160)
 
-        Boton_Analizar= tkinter.Button(self.Frame,text="Analizar",font=("bold",13),bg="white")
+        Boton_Analizar= tkinter.Button(self.Frame,text="Analizar",font=("bold",13),bg="white",
+        command=self.Abrir_Html(0))
         Boton_Analizar.place(x=25,y=210)
 
-        Boton_Errores= tkinter.Button(self.Frame,text="Errores",font=("bold",13),bg="white")
+        Boton_Errores= tkinter.Button(self.Frame,text="Errores",font=("bold",13),bg="white",
+        command=self.Abrir_Html(1))
         Boton_Errores.place(x=25,y=260)
 
-        Boton_Salir= tkinter.Button(self.Frame,text="Salir",font=("bold",13),bg="red",foreground="white",command=self.Salir)
+        Boton_Salir= tkinter.Button(self.Frame,text="Salir",font=("bold",13),bg="red",foreground="white",
+        command=self.Salir)
         Boton_Salir.place(x=25,y=500)
 
         Boton_abrirDocumento= tkinter.Button(self.Frame,text="Abrir",font=("bold",13),bg="white", command=self.B_Ayuda)
@@ -97,6 +100,7 @@ class main:
                     ruta.close()
                 except:
                     print("ERROR")
+
     def B_Ayuda(self):
         eleccion= self.Boton_Ayuda.get()
         if eleccion=="Manual de usuario":
@@ -105,7 +109,17 @@ class main:
              webbrowser.open_new_tab("file:///"+os.getcwd()+"/Manuales/Autor.pdf")
         elif eleccion=="Manual técnico":
              webbrowser.open_new_tab("file:///"+os.getcwd()+"/Manuales/Manual técnico.pdf")
-    
+
+    def Abrir_Html(self,key):
+        if key==1:
+            if os.path.exists("file:///"+os.getcwd()+"/Resultados/Errores.html"):
+                webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/Errores.html")
+            else:
+                messagebox.showinfo(title="Atención",message="No se ha encontrado el archivo")
+        else:
+            webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/RESULTADOS.html")
+
+
            
 
 

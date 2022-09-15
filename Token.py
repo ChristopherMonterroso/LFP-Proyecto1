@@ -1,5 +1,5 @@
 from enum import Enum
-
+import re
 class Tokens(Enum):
     TK_MENOR= "<"
     TK_E_NUMERO="Numero"
