@@ -1,10 +1,11 @@
 
 import webbrowser
 import re
-from tkinter import END, Event, Frame, Scrollbar, filedialog, messagebox, ttk
+from tkinter import END, Frame, Scrollbar, filedialog, messagebox, ttk
 import tkinter
 import os
 import easygui
+from Analizador import Analizador
 class main:
     def __init__(self,root) -> None:
         self.ventana=root
@@ -40,11 +41,11 @@ class main:
         Boton_GuardarComo.place(x=25,y=160)
 
         Boton_Analizar= tkinter.Button(self.Frame,text="Analizar",font=("bold",13),bg="white",
-        command=self.Abrir_Html(0))
+        command=self.analizar)
         Boton_Analizar.place(x=25,y=210)
 
         Boton_Errores= tkinter.Button(self.Frame,text="Errores",font=("bold",13),bg="white",
-        command=self.Abrir_Html(1))
+        command=self.Abrir_Html_Errores)
         Boton_Errores.place(x=25,y=260)
 
         Boton_Salir= tkinter.Button(self.Frame,text="Salir",font=("bold",13),bg="red",foreground="white",
@@ -74,6 +75,12 @@ class main:
             self.MostrarTxt.insert(END,contenido)
         except:
             print("ERROR")
+    def analizar(self):
+        contenido= str(self.MostrarTxt.get("1.0",END))
+        if contenido!="":
+
+            Analizador(contenido).compile()
+            self.Abrir_Html_Resultados()
 
     def Guardar(self):
         contenido= str(self.MostrarTxt.get("1.0",END))
@@ -110,14 +117,17 @@ class main:
         elif eleccion=="Manual técnico":
              webbrowser.open_new_tab("file:///"+os.getcwd()+"/Manuales/Manual técnico.pdf")
 
-    def Abrir_Html(self,key):
-        if key==1:
-            if os.path.exists("file:///"+os.getcwd()+"/Resultados/Errores.html"):
-                webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/Errores.html")
-            else:
-                messagebox.showinfo(title="Atención",message="No se ha encontrado el archivo")
+    def Abrir_Html_Errores(self):
+        print(os.getcwd())
+        if os.path.exists("./Records/ERRORES_201902363.html"):
+           webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/ERRORES_201902363.html")
         else:
-            webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/RESULTADOS.html")
+            messagebox.showinfo(title="Atención",message="No se ha encontrado el archivo")
+    def Abrir_Html_Resultados(self):
+        if os.path.exists("./Records/RESULTADOS_201902363.html"):
+            webbrowser.open_new_tab("file:///"+os.getcwd()+"/Records/RESULTADOS_201902363.html")
+        else:
+            messagebox.showinfo(title="Atención",message="No se ha encontrado el archivo")
 
 
            
